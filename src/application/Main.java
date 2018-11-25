@@ -27,7 +27,9 @@ public class Main extends Application {
 		try {
 			Group root = new Group();
 			root.getChildren().add(vue);
-			primaryStage.setScene(new Scene(root));
+			Scene scene = new Scene(root);
+			scene.setOnKeyPressed(controller);
+			primaryStage.setScene(scene);
 			primaryStage.show();
 		} catch (Exception e) {
 			e.printStackTrace();

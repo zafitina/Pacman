@@ -63,13 +63,13 @@ public class Case {
 
 	public String toString() {
 		String s = "";
-		if (this.isEmpty()) {
-			s += "[   ]";
+		if (this.isEmpty() && this.model == null) {
+			s += "[ ]";
 		}
 		if (this.isFull()) {
-			s += "[###]";
+			s += "[#]";
 		}
-		if (!this.isEmpty()) {
+		if (this.model != null) {
 			s += this.model;
 		}
 		return s;

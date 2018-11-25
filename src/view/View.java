@@ -43,21 +43,24 @@ public class View extends Canvas {
 		int size = 15;
 		for (int i = 0; i < grille.getSize(); i++) {
 			for (int j = 0; j < grille.getSize(); j++) {
-				if (grille.getCases()[i][j].getModel() instanceof Pacman) {
-					gc.setFill(Color.YELLOW);
-					gc.fillRect(x, y, size, size);
-				}
-				if (grille.getCases()[i][j].getModel() instanceof Fantome) {
-					gc.setFill(Color.RED);
-					gc.fillRect(x, y, size, size);
-				}
-				if (grille.getCases()[i][j].isFull() == false && grille.getCases()[i][j] == null) {
-					gc.setFill(Color.BLACK);
-					gc.fillRect(x, y, size, size);
-				}
-				if (grille.getCases()[i][j].isFull() == true) {
-					gc.setFill(Color.BLUE);
-					gc.fillRect(x, y, size, size);
+				if (grille.getCases()[i][j].getModel() != null) {
+					if (grille.getCases()[i][j].getModel() instanceof Pacman) {
+						gc.setFill(Color.YELLOW);
+						gc.fillRect(x, y, size, size);
+					}
+					if (grille.getCases()[i][j].getModel() instanceof Fantome) {
+						gc.setFill(Color.RED);
+						gc.fillRect(x, y, size, size);
+					}
+				} else {
+					if (grille.getCases()[i][j].isEmpty()) {
+						gc.setFill(Color.BLACK);
+						gc.fillRect(x, y, size, size);
+					}
+					if (grille.getCases()[i][j].isFull()) {
+						gc.setFill(Color.BLUE);
+						gc.fillRect(x, y, size, size);
+					}
 				}
 				x += size;
 			}

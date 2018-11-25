@@ -12,6 +12,6 @@ public class Fantome extends ModeleEntite {
 	}
 
 	public String toString() {
-		return "[ F ]";
+		return "[F]";
 	}
 }

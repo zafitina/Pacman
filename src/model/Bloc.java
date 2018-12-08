@@ -1,17 +1,17 @@
 package model;
 
-public class Case extends ModeleEntite {
+public class Bloc extends ModeleEntite {
 
-	public Case(String name, int x, int y) {
+	public Bloc(String name, int x, int y) {
 		super(name, x, y);
 	}
 
 	public String toString() {
-		return "[ ]";
+		return "[#]";
 	}
 
 	@Override
 	public void run() {
-		
+
 	}
 }

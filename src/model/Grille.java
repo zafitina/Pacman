@@ -10,140 +10,151 @@ import enumeration.Direction;
  *
  */
 public class Grille {
-	private Case[][] cases;
+	private ModeleEntite[][] cases;
 	private int size;
+	private Pacman pacman;
+	private Fantome fant1, fant2, fant3, fant4;
 
 	public Grille(int _size) {
 		this.size = _size;
-		this.cases = new Case[this.size][this.size];
+		this.cases = new ModeleEntite[this.size][this.size];
+		this.pacman = new Pacman(this, "pacman", 15, 10);
+		this.fant1 = new Fantome(this, "ghost1", 7, 10);
+		this.fant2 = new Fantome(this, "ghost2", 9, 9);
+		this.fant3 = new Fantome(this, "ghost3", 9, 10);
+		this.fant4 = new Fantome(this, "ghost4", 9, 11);
+	}
+
+	public void add(ModeleEntite caz) {
+		this.cases[caz.getX()][caz.getY()] = caz;
 	}
 
 	public void initGrille() {
 		init();
 		// AJOUT DES MURS
 		for (int j = 1; j < this.size - 1; j++) {
-			this.cases[0][j] = new Case();
-			this.cases[this.size - 1][j] = new Case();
+			this.add(new Bloc("", 0, j));
+			this.add(new Bloc("", this.size - 1, j));
 		}
 		for (int i = 0; i < 7; i++) {
-			this.cases[i][1] = new Case();
-			this.cases[i][this.size - 2] = new Case();
+			this.add(new Bloc("", i, 1));
+			this.add(new Bloc("", i, this.size - 2));
 		}
 		for (int i = this.size - 1; i > this.size - 10; i--) {
-			this.cases[i][1] = new Case();
-			this.cases[i][this.size - 2] = new Case();
+			this.add(new Bloc("", i, 1));
+			this.add(new Bloc("", i, this.size - 2));
 		}
 		for (int j = 3; j < 5; j++) {
-			this.cases[2][j] = new Case();
-			this.cases[4][j] = new Case();
-			this.cases[6][j] = new Case();
-			this.cases[12][j] = new Case();
-			this.cases[14][j] = new Case();
-			this.cases[18][j] = new Case();
+			this.add(new Bloc("", 2, j));
+			this.add(new Bloc("", 4, j));
+			this.add(new Bloc("", 6, j));
+			this.add(new Bloc("", 12, j));
+			this.add(new Bloc("", 14, j));
+			this.add(new Bloc("", 18, j));
 		}
 		for (int j = this.size - 4; j > this.size - 6; j--) {
-			this.cases[2][j] = new Case();
-			this.cases[4][j] = new Case();
-			this.cases[6][j] = new Case();
-			this.cases[12][j] = new Case();
-			this.cases[14][j] = new Case();
-			this.cases[18][j] = new Case();
+			this.add(new Bloc("", 2, j));
+			this.add(new Bloc("", 4, j));
+			this.add(new Bloc("", 6, j));
+			this.add(new Bloc("", 12, j));
+			this.add(new Bloc("", 14, j));
+			this.add(new Bloc("", 18, j));
 		}
-		this.cases[18][5] = new Case();
-		this.cases[18][this.size - 6] = new Case();
-		this.cases[6][2] = new Case();
-		this.cases[12][2] = new Case();
-		this.cases[6][this.size - 3] = new Case();
-		this.cases[12][this.size - 3] = new Case();
+		this.add(new Bloc("", 18, 5));
+		this.add(new Bloc("", 18, this.size - 6));
+		this.add(new Bloc("", 6, 2));
+		this.add(new Bloc("", 6, this.size - 3));
+		this.add(new Bloc("", 12, 2));
+		this.add(new Bloc("", 12, this.size - 3));
 		for (int j = 0; j < 5; j++) {
-			this.cases[8][j] = new Case();
-			this.cases[10][j] = new Case();
+			this.add(new Bloc("", 10, j));
+			this.add(new Bloc("", 8, j));
 		}
 		for (int j = this.size - 1; j > this.size - 6; j--) {
-			this.cases[8][j] = new Case();
-			this.cases[10][j] = new Case();
+			this.add(new Bloc("", 10, j));
+			this.add(new Bloc("", 8, j));
 		}
 		for (int i = 6; i < 9; i++) {
-			this.cases[i][4] = new Case();
-			this.cases[i][this.size - 5] = new Case();
+			this.add(new Bloc("", i, this.size - 5));
+			this.add(new Bloc("", i, 4));
 		}
 		for (int i = 10; i < 13; i++) {
-			this.cases[i][4] = new Case();
-			this.cases[i][this.size - 5] = new Case();
+			this.add(new Bloc("", i, this.size - 5));
+			this.add(new Bloc("", i, 4));
 		}
 		for (int i = 15; i < 17; i++) {
-			this.cases[i][4] = new Case();
-			this.cases[i][this.size - 5] = new Case();
+			this.add(new Bloc("", i, this.size - 5));
+			this.add(new Bloc("", i, 4));
 		}
 		for (int i = 4; i < 9; i++) {
-			this.cases[i][6] = new Case();
-			this.cases[i][this.size - 7] = new Case();
+			this.add(new Bloc("", i, this.size - 7));
+			this.add(new Bloc("", i, 6));
 		}
 		for (int i = 10; i < 13; i++) {
-			this.cases[i][6] = new Case();
-			this.cases[i][this.size - 7] = new Case();
+			this.add(new Bloc("", i, this.size - 7));
+			this.add(new Bloc("", i, 6));
 		}
 		for (int i = 16; i < 19; i++) {
-			this.cases[i][6] = new Case();
-			this.cases[i][this.size - 7] = new Case();
+			this.add(new Bloc("", i, this.size - 7));
+			this.add(new Bloc("", i, 6));
 		}
 		for (int i = 8; i < 11; i++) {
-			this.cases[i][8] = new Case();
-			this.cases[i][this.size - 9] = new Case();
+			this.add(new Bloc("", i, this.size - 9));
+			this.add(new Bloc("", i, 8));
 		}
 		for (int i = 0; i < 3; i++) {
-			this.cases[i][10] = new Case();
+			this.add(new Bloc("", i, 10));
 		}
 		for (int i = 4; i < 7; i++) {
-			this.cases[i][10] = new Case();
+			this.add(new Bloc("", i, 10));
 		}
 		for (int i = 12; i < 15; i++) {
-			this.cases[i][10] = new Case();
+			this.add(new Bloc("", i, 10));
 		}
 		for (int i = 16; i < 19; i++) {
-			this.cases[i][10] = new Case();
+			this.add(new Bloc("", i, 10));
 		}
-		this.cases[16][2] = new Case();
-		this.cases[16][this.size - 3] = new Case();
+		this.add(new Bloc("", 16, this.size - 3));
+		this.add(new Bloc("", 16, 2));
 		for (int j = 6; j < 9; j++) {
-			this.cases[2][j] = new Case();
-			this.cases[6][j] = new Case();
-			this.cases[14][j] = new Case();
-			this.cases[18][j] = new Case();
+			this.add(new Bloc("", 2, j));
+			this.add(new Bloc("", 6, j));
+			this.add(new Bloc("", 14, j));
+			this.add(new Bloc("", 18, j));
 		}
 		for (int j = 12; j < 15; j++) {
-			this.cases[2][j] = new Case();
-			this.cases[6][j] = new Case();
-			this.cases[14][j] = new Case();
-			this.cases[18][j] = new Case();
+			this.add(new Bloc("", 2, j));
+			this.add(new Bloc("", 6, j));
+			this.add(new Bloc("", 14, j));
+			this.add(new Bloc("", 18, j));
 		}
 		for (int j = 8; j < 13; j++) {
-			this.cases[4][j] = new Case();
-			this.cases[10][j] = new Case();
-			this.cases[12][j] = new Case();
-			this.cases[16][j] = new Case();
+			this.add(new Bloc("", 4, j));
+			this.add(new Bloc("", 10, j));
+			this.add(new Bloc("", 12, j));
+			this.add(new Bloc("", 16, j));
 		}
 		for (int j = 8; j < 10; j++) {
-			this.cases[8][j] = new Case();
-			this.cases[10][j] = new Case();
+			this.add(new Bloc("", 8, j));
+			this.add(new Bloc("", 10, j));
 		}
 		for (int j = 11; j < 13; j++) {
-			this.cases[8][j] = new Case();
-			this.cases[10][j] = new Case();
+			this.add(new Bloc("", 8, j));
+			this.add(new Bloc("", 10, j));
 		}
 
 		// AJOUT DE PACMAN ET DES FANTÔMES
-		this.cases[7][10] = new Case(new Fantome());
-		this.cases[9][9] = new Case(new Fantome());
-		this.cases[9][10] = new Case(new Fantome());
-		this.cases[9][11] = new Case(new Fantome());
-		this.cases[15][10] = new Case(new Pacman());
+		this.add(this.fant1);
+		this.add(this.fant2);
+		this.add(this.fant3);
+		this.add(this.fant4);
+		this.add(this.pacman);
 	}
 
 	public void init() {
 		for (int i = 0; i < this.size; i++) {
 			for (int j = 0; j < this.size; j++) {
-				this.cases[i][j] = new Case(null);
+				this.add(new Case("", i, j));
 			}
 		}
 	}
@@ -158,7 +169,7 @@ public class Grille {
 	}
 
 	/* GETTERS AND SETTERS */
-	public Case[][] getCases() {
+	public ModeleEntite[][] getCases() {
 		return cases;
 	}
 
@@ -172,5 +183,45 @@ public class Grille {
 
 	public void setSize(int size) {
 		this.size = size;
+	}
+
+	public Pacman getPacman() {
+		return pacman;
+	}
+
+	public void setPacman(Pacman pacman) {
+		this.pacman = pacman;
+	}
+
+	public Fantome getFant1() {
+		return fant1;
+	}
+
+	public void setFant1(Fantome fant1) {
+		this.fant1 = fant1;
+	}
+
+	public Fantome getFant2() {
+		return fant2;
+	}
+
+	public void setFant2(Fantome fant2) {
+		this.fant2 = fant2;
+	}
+
+	public Fantome getFant3() {
+		return fant3;
+	}
+
+	public void setFant3(Fantome fant3) {
+		this.fant3 = fant3;
+	}
+
+	public Fantome getFant4() {
+		return fant4;
+	}
+
+	public void setFant4(Fantome fant4) {
+		this.fant4 = fant4;
 	}
 }

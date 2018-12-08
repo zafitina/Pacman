@@ -29,6 +29,7 @@ public class Main extends Application {
 			root.getChildren().add(vue);
 			Scene scene = new Scene(root);
 			scene.setOnKeyPressed(controller);
+			primaryStage.setResizable(false);
 			primaryStage.setScene(scene);
 			primaryStage.show();
 		} catch (Exception e) {

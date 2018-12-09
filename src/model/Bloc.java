@@ -1,5 +1,9 @@
 package model;
-
+/**
+ * 
+ * @author nicolas
+ *
+ */
 public class Bloc extends ModeleEntite {
 
 	public Bloc(String name, int x, int y) {

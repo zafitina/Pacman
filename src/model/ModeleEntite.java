@@ -14,6 +14,7 @@ public abstract class ModeleEntite extends Observable implements Runnable {
 	protected int x, y;
 	protected String name;
 	protected Grille grille;
+	protected Boolean alive;
 
 	public ModeleEntite(Grille grille, String name, int i, int j) {
 		this.direction = Direction.HAUT;
@@ -21,6 +22,7 @@ public abstract class ModeleEntite extends Observable implements Runnable {
 		this.x = i;
 		this.y = j;
 		this.name = name;
+		this.alive = true;
 	}
 
 	public ModeleEntite(String name, int i, int j) {
@@ -36,6 +38,8 @@ public abstract class ModeleEntite extends Observable implements Runnable {
 			this.grille.getCases()[this.x - 1][this.y] = this;
 			this.setX(this.x - 1);
 			this.setY(this.y);
+		} else if (this.grille.getCases()[this.x - 1][this.y] instanceof Fantome) {
+			this.dead();
 		}
 	}
 
@@ -46,6 +50,8 @@ public abstract class ModeleEntite extends Observable implements Runnable {
 			this.grille.add(new Case("", this.x, this.y));
 			this.setX(this.x + 1);
 			this.setY(this.y);
+		} else if (this.grille.getCases()[this.x + 1][this.y] instanceof Fantome) {
+			this.dead();
 		}
 	}
 
@@ -56,6 +62,8 @@ public abstract class ModeleEntite extends Observable implements Runnable {
 			this.grille.add(new Case("", this.x, this.y));
 			this.setX(this.x);
 			this.setY(this.y - 1);
+		} else if (this.grille.getCases()[this.x][this.y - 1] instanceof Fantome) {
+			this.dead();
 		}
 	}
 
@@ -66,7 +74,14 @@ public abstract class ModeleEntite extends Observable implements Runnable {
 			this.grille.getCases()[this.x][this.y + 1] = this;
 			this.setX(this.x);
 			this.setY(this.y + 1);
+		} else if (this.grille.getCases()[this.x][this.y + 1] instanceof Fantome) {
+			this.dead();
 		}
+	}
+
+	public void dead() {
+		this.setAlive(false);
+		this.grille.add(new Case("", this.x, this.y));
 	}
 
 	public void move() {
@@ -118,5 +133,13 @@ public abstract class ModeleEntite extends Observable implements Runnable {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public Boolean isAlive() {
+		return this.alive;
+	}
+
+	public void setAlive(Boolean dead) {
+		this.alive = dead;
 	}
 }

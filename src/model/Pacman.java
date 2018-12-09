@@ -22,11 +22,11 @@ public class Pacman extends ModeleEntite {
 
 	@Override
 	public void run() {
-		while (true) {
+		while (this.isAlive() == true) {
 			try {
-				Thread.sleep(500);
+				Thread.sleep(300);
 				this.move();
-//				System.out.println("ICI");
+				// System.out.println("ICI");
 				this.setChanged();
 				this.notifyObservers();
 			} catch (InterruptedException e) {

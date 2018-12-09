@@ -1,5 +1,9 @@
 package model;
-
+/**
+ * 
+ * @author nicolas
+ *
+ */
 public class Case extends ModeleEntite {
 
 	public Case(String name, int x, int y) {

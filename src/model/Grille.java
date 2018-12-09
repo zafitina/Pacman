@@ -60,6 +60,8 @@ public class Grille {
 			this.add(new Bloc("", 14, j));
 			this.add(new Bloc("", 18, j));
 		}
+		this.add(new Bloc("", 9, 4));
+		this.add(new Bloc("", 9, this.size - 5));
 		this.add(new Bloc("", 18, 5));
 		this.add(new Bloc("", 18, this.size - 6));
 		this.add(new Bloc("", 6, 2));

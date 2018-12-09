@@ -10,6 +10,9 @@ import enumeration.Direction;
  *
  */
 public class Fantome extends ModeleEntite {
+	/**
+	 * Le processus qui va lancer le fantôme
+	 */
 	Thread t;
 
 	public Fantome(Grille grille, String name, int x, int y) {
@@ -22,6 +25,11 @@ public class Fantome extends ModeleEntite {
 		return "[F]";
 	}
 
+	/**
+	 * Récupération d'une direction aléatoire quand le fantôme est bloqué
+	 * 
+	 * @return
+	 */
 	public Direction randomDirection() {
 		Random rand = new Random();
 		int alea = rand.nextInt(4);
@@ -51,6 +59,7 @@ public class Fantome extends ModeleEntite {
 			this.setX(this.x - 1);
 			this.setY(this.y);
 		} else if (this.grille.getCases()[this.x - 1][this.y] instanceof Pacman) {
+			// Tuer le pacman devant lui
 			this.grille.getCases()[this.x - 1][this.y].dead();
 		} else {
 			this.randomDirection();
@@ -93,6 +102,7 @@ public class Fantome extends ModeleEntite {
 			this.setX(this.x);
 			this.setY(this.y + 1);
 		} else if (this.grille.getCases()[this.x][this.y + 1] instanceof Pacman) {
+			// Si le pacman est devant lui, il le tue
 			this.grille.getCases()[this.x][this.y + 1].dead();
 		} else {
 			this.randomDirection();
@@ -103,6 +113,7 @@ public class Fantome extends ModeleEntite {
 	public void run() {
 		while (this.isAlive() == true) {
 			try {
+				// vitesse de déplacement
 				Thread.sleep(250);
 				this.move();
 			} catch (InterruptedException e) {

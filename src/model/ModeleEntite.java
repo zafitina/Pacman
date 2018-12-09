@@ -10,12 +10,35 @@ import enumeration.Direction;
  *
  */
 public abstract class ModeleEntite extends Observable implements Runnable {
+	/**
+	 * Direction de pour pacman et les fantômes
+	 */
 	protected Direction direction;
+	/**
+	 * les position des modèles dans la grille
+	 */
 	protected int x, y;
+	/**
+	 * Le nom de chaque entité
+	 */
 	protected String name;
+	/**
+	 * la grille où les ajouté
+	 */
 	protected Grille grille;
+	/**
+	 * attribut pour savoir i l'enttité est vivant ou pas
+	 */
 	protected Boolean alive;
 
+	/**
+	 * Constructeur des fantômes et pacman
+	 * 
+	 * @param grille
+	 * @param name
+	 * @param i
+	 * @param j
+	 */
 	public ModeleEntite(Grille grille, String name, int i, int j) {
 		this.direction = Direction.HAUT;
 		this.grille = grille;
@@ -25,12 +48,22 @@ public abstract class ModeleEntite extends Observable implements Runnable {
 		this.alive = true;
 	}
 
+	/**
+	 * COnstructeur de case vides et blocs
+	 * 
+	 * @param name
+	 * @param i
+	 * @param j
+	 */
 	public ModeleEntite(String name, int i, int j) {
 		this.x = i;
 		this.y = j;
 		this.name = name;
 	}
 
+	/**
+	 * Direction haut
+	 */
 	public void goUP() {
 		if (this.grille.getCases()[this.x - 1][this.y] instanceof Case) {
 			this.setDirection(Direction.HAUT);
@@ -43,6 +76,9 @@ public abstract class ModeleEntite extends Observable implements Runnable {
 		}
 	}
 
+	/**
+	 * Direction bas
+	 */
 	public void goDown() {
 		if (this.grille.getCases()[this.x + 1][this.y] instanceof Case) {
 			this.setDirection(Direction.BAS);
@@ -55,6 +91,9 @@ public abstract class ModeleEntite extends Observable implements Runnable {
 		}
 	}
 
+	/**
+	 * Direction gauche
+	 */
 	public void goLeft() {
 		if (this.grille.getCases()[this.x][this.y - 1] instanceof Case) {
 			this.setDirection(Direction.GAUCHE);
@@ -67,6 +106,9 @@ public abstract class ModeleEntite extends Observable implements Runnable {
 		}
 	}
 
+	/**
+	 * Direction droite
+	 */
 	public void goRight() {
 		if (this.grille.getCases()[this.x][this.y + 1] instanceof Case) {
 			this.setDirection(Direction.DROITE);
@@ -79,11 +121,17 @@ public abstract class ModeleEntite extends Observable implements Runnable {
 		}
 	}
 
+	/**
+	 * Fonction pour tuer une entité
+	 */
 	public void dead() {
 		this.setAlive(false);
 		this.grille.add(new Case("", this.x, this.y));
 	}
 
+	/**
+	 * Déplacement d'une entitéen fonction de sa direction
+	 */
 	public void move() {
 		switch (this.getDirection()) {
 		case HAUT:

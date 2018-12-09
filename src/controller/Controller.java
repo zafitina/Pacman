@@ -35,6 +35,9 @@ public class Controller implements EventHandler<KeyEvent> {
 		return this.view;
 	}
 
+	/**
+	 * Gestion des clics de l'utilisateurs
+	 */
 	@Override
 	public void handle(KeyEvent event) {
 		switch (event.getCode()) {

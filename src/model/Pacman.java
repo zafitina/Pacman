@@ -8,6 +8,7 @@ import enumeration.Direction;
  *
  */
 public class Pacman extends ModeleEntite {
+	// Le processus qui va animer pacman
 	Thread t;
 
 	public Pacman(Grille grille, String name, int x, int y) {
@@ -24,9 +25,9 @@ public class Pacman extends ModeleEntite {
 	public void run() {
 		while (this.isAlive() == true) {
 			try {
+				// vitesse de déplacement
 				Thread.sleep(300);
 				this.move();
-				// System.out.println("ICI");
 				this.setChanged();
 				this.notifyObservers();
 			} catch (InterruptedException e) {

@@ -25,10 +25,18 @@ public class Grille {
 		this.fant4 = new Fantome(this, "ghost4", 9, 11);
 	}
 
+	/**
+	 * Ajout d'une entité dans le grille
+	 * 
+	 * @param caz
+	 */
 	public void add(ModeleEntite caz) {
 		this.cases[caz.getX()][caz.getY()] = caz;
 	}
 
+	/**
+	 * Création de la grille du jeu
+	 */
 	public void initGrille() {
 		init();
 		// AJOUT DES MURS
@@ -153,6 +161,9 @@ public class Grille {
 		this.add(this.pacman);
 	}
 
+	/**
+	 * Initialisation de la grille avec des case vide
+	 */
 	public void init() {
 		for (int i = 0; i < this.size; i++) {
 			for (int j = 0; j < this.size; j++) {
@@ -161,6 +172,9 @@ public class Grille {
 		}
 	}
 
+	/**
+	 * Affichage de la grille en console
+	 */
 	public void showGrille() {
 		for (int i = 0; i < this.size; i++) {
 			for (int j = 0; j < this.size; j++) {
